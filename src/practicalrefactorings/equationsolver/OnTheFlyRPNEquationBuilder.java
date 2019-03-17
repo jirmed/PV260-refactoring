@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class OnTheFlyRPNEquationBuilder implements RPNEquationBuilder {
 
-	private Stack<Node> stack = new Stack<>();
+	private Stack<Evaluable> stack = new Stack<>();
 
 	@Override
 	public RPNEquationBuilder push(String token) {
@@ -32,11 +32,9 @@ public class OnTheFlyRPNEquationBuilder implements RPNEquationBuilder {
 
 	private void addOperator(String token) {
 		try {
-			Operator operator = new Operator(token.charAt(0));
-			Node right = stack.pop();
-			Node left = stack.pop();
-			operator.setLeft(left);
-			operator.setRight(right);
+			Evaluable right = stack.pop();
+			Evaluable left = stack.pop();
+			Evaluable operator = new Operator(token.charAt(0),left ,right );
 			stack.push(operator);
 		}
 		catch (EmptyStackException e) {
@@ -46,7 +44,7 @@ public class OnTheFlyRPNEquationBuilder implements RPNEquationBuilder {
 
 	private void addNumber(String token) {
 		int value = Integer.parseInt(token);
-		Node number = new Number(value);
+		Evaluable number = new Number(value);
 		stack.push(number);
 	}
 

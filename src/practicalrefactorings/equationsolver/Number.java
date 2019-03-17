@@ -1,6 +1,6 @@
 package practicalrefactorings.equationsolver;
 
-public class Number extends Node {
+public class Number implements Evaluable {
     private int value;
 
     public Number(int value) {

@@ -1,36 +1,26 @@
 package practicalrefactorings.equationsolver;
 
-public class Operator extends Node {
-    private char operator;
-    private Node left;
-    private Node right;
+public class Operator implements Evaluable {
+    private char symbol;
+    private Evaluable left;
+    private Evaluable right;
 
-    public Operator(char operator) {
-        this.operator=operator;
-    }
-
-    public boolean hasLeft() {
-        return left != null;
-    }
-
-    public void setLeft(Node left) {
+    public Operator(char symbol, Evaluable left, Evaluable right) {
+        this.symbol = symbol;
         this.left = left;
-    }
-
-    public void setRight(Node right) {
-        this.right = right;
+        this.right =right;
     }
 
     @Override
     public int evaluate() {
         Operation operation = OperationFactory
-                .getOperation(operator)
-                .orElseThrow(() -> new IllegalStateException("Unknown operator: " + operator));
+                .getOperation(symbol)
+                .orElseThrow(() -> new IllegalStateException("Unknown symbol: " + symbol));
         return operation.calculate(left.evaluate(), right.evaluate());
     }
 
     @Override
     public String representation() {
-        return "(" + left.representation() + " " + operator + " " + right.representation() + ")";
+        return "(" + left.representation() + " " + symbol + " " + right.representation() + ")";
     }
 }
