@@ -37,4 +37,5 @@ public interface Grid<T> {
 	 * */
 	void set(T item, int x, int y);
 
+	Grid<T> copy();
 }

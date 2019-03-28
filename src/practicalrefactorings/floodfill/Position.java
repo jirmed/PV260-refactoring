@@ -6,7 +6,10 @@
 package practicalrefactorings.floodfill;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Objects;
+
+import static java.util.Arrays.asList;
 
 public class Position {
 
@@ -47,5 +50,14 @@ public class Position {
 
 	boolean isInBounds(Grid<Color> original) {
 		return x() >= 0 && x() < original.width() && y() >= 0 && y() < original.height();
+	}
+
+	List<Position> getNeighbors() {
+		return asList(
+				new Position(x() + 1, y()),
+				new Position(x(), y() + 1),
+				new Position(x() - 1, y()),
+				new Position(x(), y() - 1)
+		);
 	}
 }
