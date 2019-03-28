@@ -10,11 +10,11 @@ import java.math.BigDecimal;
 
 import static java.util.Arrays.asList;
 
-import java.util.Date;
 import java.util.List;
 
 public class Person implements Printable {
 
+    public static final String TITLE = "PERSON REPORT";
     private String id;
     private String name;
     private List<String> jobs;
@@ -33,24 +33,15 @@ public class Person implements Printable {
         //other person specific responsibility
     }
 
-    public void printPerson() {
-        System.out.println("/------------------------------------\\");
-        System.out.println("|            PERSON REPORT           |");
-        System.out.println("\\------------------------------------/");
-        System.out.println("   Some company logo here");
-        System.out.println("   Some contact info here");
-        System.out.println("   Date: " + new Date()) ;
-        System.out.println(">------------------------------------<");
-        System.out.print(print());
-        System.out.println(">------------------------------------<");
-        System.out.println("   Some confidentiality notice");
-        System.out.println("   Some more super important info");
-    }
-
     public static void main(String[] args) {
         MyCompanyPrinter printer = new MyCompanyPrinter();
         System.out.println(printer.print(
                 new Person("1", "Pete", asList("CEO", "Janitor"))));
+    }
+
+    @Override
+    public String title() {
+        return TITLE;
     }
 
     @Override
@@ -65,4 +56,6 @@ public class Person implements Printable {
         }
         return stringBuilder.toString();
     }
+
+
 }

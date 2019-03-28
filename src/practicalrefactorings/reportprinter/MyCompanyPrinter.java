@@ -13,7 +13,7 @@ public class MyCompanyPrinter implements Printer {
 	public String print(Printable subject) {
 		StringBuilder output = new StringBuilder();
 		output.append("/------------------------------------\\\n");
-		output.append("|            PERSON REPORT           |\n");
+		output.append("|" + centerString(subject.title(),36) + "|\n" );
 		output.append("\\------------------------------------/\n");
 		output.append("   Some company logo here\n");
 		output.append("   Some contact info here\n");
@@ -24,6 +24,10 @@ public class MyCompanyPrinter implements Printer {
 		output.append("   Some confidentiality notice\n");
 		output.append("   Some more super important info\n");
 		return output.toString();
+	}
+
+	private String centerString ( String s, int width) {
+		return String.format("%-" + width  + "s", String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
 	}
 
 }
